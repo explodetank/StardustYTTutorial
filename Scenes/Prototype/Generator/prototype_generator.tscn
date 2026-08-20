@@ -1,12 +1,18 @@
 [gd_scene format=3 uid="uid://31gbaasd6bm5"]
 
-[node name="PrototypeGenerator" type="Control" unique_id=1441660461]
+[ext_resource type="Script" uid="uid://qtaq1lj6n8po" path="res://Scenes/Prototype/Generator/prototype_generator.gd" id="1_ydoly"]
+
+[node name="PrototypeGenerator" type="Control" unique_id=1441660461 node_paths=PackedStringArray("button", "timer", "label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ydoly")
+button = NodePath("Button")
+timer = NodePath("Timer")
+label = NodePath("Label")
 metadata/_edit_lock_ = true
 
 [node name="Button" type="Button" parent="." unique_id=148038033]
@@ -36,3 +42,8 @@ theme_type_variation = &"HeaderLarge"
 text = "Stardust : <No Value>"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=1544956265]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
