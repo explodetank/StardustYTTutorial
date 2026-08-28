@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://b2ubc40ik8l75"]
 
+[ext_resource type="Script" uid="uid://dw24mmmpxxgar" path="res://User_Interface/user_interface.gd" id="1_ngjx5"]
 [ext_resource type="PackedScene" uid="uid://31gbaasd6bm5" path="res://Scenes/Prototype/Generator/prototype_generator.tscn" id="1_osxxb"]
+[ext_resource type="PackedScene" uid="uid://mk1qektfiyoi" path="res://Scenes/Prototype/Clicker/prototype_clicker.tscn" id="4_fuc6n"]
 
 [node name="UserInterface" type="Control" unique_id=609956277]
 layout_mode = 3
@@ -9,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ngjx5")
 metadata/_edit_lock_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=426950140]
@@ -48,9 +51,13 @@ theme_override_constants/margin_bottom = 15
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer" unique_id=2119849044]
 layout_mode = 2
 
-[node name="LinkButton" type="LinkButton" parent="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer" unique_id=2131056240]
+[node name="PrototypeGeneratorLink" type="LinkButton" parent="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer" unique_id=2131056240]
 layout_mode = 2
 text = "Prototype Generator"
+
+[node name="PrototypeClickerLink" type="LinkButton" parent="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer" unique_id=471185736]
+layout_mode = 2
+text = "Prototype Clicker"
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/LeftPanel/VBoxContainer" unique_id=1928711654]
 layout_mode = 2
@@ -88,9 +95,18 @@ theme_override_constants/margin_bottom = 16
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer/MarginContainer" unique_id=216555084]
 layout_mode = 2
 
-[node name="MainView" type="Control" parent="HBoxContainer" unique_id=862419701]
+[node name="MainView" type="Control" parent="HBoxContainer" unique_id=1356931978]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PrototypeGenerator" parent="HBoxContainer/MainView" unique_id=1441660461 instance=ExtResource("1_osxxb")]
+[node name="PrototypeGenerator" parent="HBoxContainer/MainView" unique_id=1441660461 node_paths=PackedStringArray("user_interface") instance=ExtResource("1_osxxb")]
 layout_mode = 1
+user_interface = NodePath("../../..")
+
+[node name="PrototypeClicker" parent="HBoxContainer/MainView" unique_id=1073322937 node_paths=PackedStringArray("user_interface") instance=ExtResource("4_fuc6n")]
+layout_mode = 1
+user_interface = NodePath("../../..")
+view = 1
+
+[connection signal="pressed" from="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer/PrototypeGeneratorLink" to="." method="_on_prototype_generator_link_pressed"]
+[connection signal="pressed" from="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer/PrototypeClickerLink" to="." method="_on_prototype_clicker_link_pressed"]

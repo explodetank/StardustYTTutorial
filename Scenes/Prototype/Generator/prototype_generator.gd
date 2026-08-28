@@ -11,12 +11,18 @@ extends Control
 ## Reference to label displaying the current amount of stardust made.
 @export var label:Label
 
+## Reference to the user interface.
+@export var user_interface:UserInterface
+## View reference.
+@export var view:UserInterface.Views
+
 ## The current amount of stardust made.
 var stardust:int = 0
 
 ## Initialize the text when the node is created.
 func _ready() -> void:
 	update_label_test()
+	user_interface.navigation_requested.connect(_on_navigation_request)
 
 ## Adds one stardust.
 func create_stardust() -> void:
@@ -31,6 +37,7 @@ func update_label_test() -> void:
 func begin_generating_stardust():
 	timer.start()
 	button.disabled = true
+	visible = true
 
 ## Triggered when the button is pressed.
 func _on_button_pressed() -> void:
@@ -39,3 +46,9 @@ func _on_button_pressed() -> void:
 ## Triggered when the timer times out.
 func _on_timer_timeout() -> void:
 	create_stardust()
+## Determines whether the object is visible or not.
+func _on_navigation_request(requested_view : UserInterface.Views) -> void:
+	if requested_view == view:
+		visible = true
+		return
+	visible = false
